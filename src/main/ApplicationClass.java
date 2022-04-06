@@ -9,7 +9,6 @@ public class ApplicationClass {
         Scanner scanner = new Scanner(System.in);
         VehicleService vehicleService = new VehicleService();
 
-
         int continueOrNot = 1;
         while (continueOrNot != 0) {
             System.out.println("----------------------");
@@ -19,6 +18,7 @@ public class ApplicationClass {
             System.out.println("3. - Add a Vehicle");
             System.out.println("4. - Update a Vehicle");
             System.out.println("5. - Delete a Vehicle");
+            System.out.println("6. - Generate Vehicle Report");
             int selectedOption = scanner.nextInt();
 
             switch (selectedOption) {
@@ -73,8 +73,12 @@ public class ApplicationClass {
                     vehicleService.deleteVehicleByModel(vehicleName);
 
                 }
+                case 6 -> {
+                    vehicleService.generateReportFile();
+                }
                 default -> System.out.println("Invalid input");
             }
+            System.out.println("----------------------------");
             System.out.println("Do you wish to continue?");
             System.out.println("0. No");
             System.out.println("1. Yes");

@@ -1,5 +1,7 @@
 package domain;
 
+import java.time.format.DateTimeFormatter;
+
 public class VehicleService {
 
 //    By taking a closer look, you will notice that the methods in the VehicleService are still returning Vehicle, even though you are working with Car now, can you explain why it works fine?
@@ -57,6 +59,22 @@ public class VehicleService {
             case PICKUP -> new PickUp(model, color, year, automaker, vehicleTypeEnum);
             case OTHERS -> new Others(model, color, year, automaker, vehicleTypeEnum);
         };
+    }
+
+    public void generateReportFile(){
+        //Set LocalDateTime Format
+        String pattern = "MMM d, yyyy, HH:mm:ss a";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(pattern);
+
+        for (Vehicle vehicle : vehicleRepository.getVehicleList()) {
+            System.out.println("#------------------------------------------------------#");
+            System.out.println("Registration Date: " + vehicle.createdAt.format(format));
+            System.out.println("AutoMaker: " + vehicle.getAutoMaker().getName());
+            System.out.println("Model: " + vehicle.getModel());
+            System.out.println("Vehicle Type: " + vehicle.getVehicleType());
+            System.out.println("Color: " + vehicle.getColor());
+            System.out.println("Year: " + vehicle.getYear());
+        }
     }
 
     public void getVehicle(String vehicleName, Vehicle newVehicle){
